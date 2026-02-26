@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Overall Attendance Report</h2>
+            <div class="card bg-primary text-white p-2">
+                <strong>Average Campus Attendance: {{ "%.1f"|format(overall_pct) }}%</strong>
+            </div>
+        </div>
+
+        <div class="card p-4">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Roll Number</th>
+                        <th>Student Name</th>
+                        <th>Present Days</th>
+                        <th>Absent Days</th>
+                        <th>Percentage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in report_data %}
+                    <tr>
+                        <td>{{ row.roll_number }}</td>
+                        <td>{{ row.full_name }}</td>
+                        <td>{{ row.present }}</td>
+                        <td>{{ row.absent }}</td>
+                        <td>
+                            <div class="progress" style="height: 20px;">
+                                <div class="progress-bar {% if row.percentage < 75 %}bg-danger{% else %}bg-success{% endif %}"
+                                    role="progressbar" style="width: {{ row.percentage }}%;"
+                                    aria-valuenow="{{ row.percentage }}" aria-valuemin="0" aria-valuemax="100">
+                                    {{ "%.1f"|format(row.percentage) }}%
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    {% if not report_data %}
+                    <tr>
+                        <td colspan="5" class="text-center">No student data found</td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+        <div class="mt-4">
+            <button class="btn btn-outline-secondary" onclick="window.print()">Print Report</button>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h2>Admin Dashboard</h2>
+        <hr>
+        <div class="row g-4 mt-2">
+            <div class="col-md-3">
+                <div class="card bg-primary text-white p-3">
+                    <h5>Add Student</h5>
+                    <p>Manage new admissions</p>
+                    <a href="{{ url_for('manage_users') }}" class="btn btn-light btn-sm">Open</a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-success text-white p-3">
+                    <h5>Add Faculty</h5>
+                    <p>Manage staff details</p>
+                    <a href="{{ url_for('manage_users') }}" class="btn btn-light btn-sm">Open</a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-info text-white p-3">
+                    <h5>Classes</h5>
+                    <p>Schedule & Subjects</p>
+                    <a href="{{ url_for('manage_subjects') }}" class="btn btn-light btn-sm">Open</a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-warning text-dark p-3">
+                    <h5>Reports</h5>
+                    <p>Overall Attendance</p>
+                    <a href="{{ url_for('reports') }}" class="btn btn-dark btn-sm">View</a>
+                </div>
+            </div>
+        </div>
+        <div class="mt-5">
+            <h4>Quick Actions</h4>
+            <div class="row">
+                <div class="col-md-3">
+                    <p>Total Users: {{ students + faculty + 1 }}</p>
+                    <p>Students: {{ students }}</p>
+                    <p>Faculty: {{ faculty }}</p>
+                </div>
+            </div>
+            <div class="list-group">
+                <a href="{{ url_for('manage_users') }}" class="list-group-item list-group-item-action">Manage Users
+                    (Students/Faculty)</a>
+                <a href="{{ url_for('manage_subjects') }}" class="list-group-item list-group-item-action">Manage
+                    Subjects</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

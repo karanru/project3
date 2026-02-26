@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h2>Faculty Dashboard</h2>
+        <hr>
+        <div class="row g-4 mt-2">
+            <div class="col-md-6">
+                <div class="card p-4">
+                    <h4>Mark Attendance</h4>
+                    <p>Select subject and date to record attendance.</p>
+                    <a href="{{ url_for('mark_attendance') }}" class="btn btn-primary">Mark Now</a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card p-4">
+                    <h4>Leave Requests</h4>
+                    <p>Approve or Reject student leaves.</p>
+                    <a href="{{ url_for('manage_leaves') }}" class="btn btn-success">View Requests</a>
+                </div>
+            </div>
+        </div>
+        <div class="mt-5">
+            <h4>My Subjects</h4>
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Data Structure (CS101)
+                    <span class="badge bg-primary rounded-pill">12 Students</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Database Systems (CS202)
+                    <span class="badge bg-primary rounded-pill">45 Students</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

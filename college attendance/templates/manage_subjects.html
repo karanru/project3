@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card p-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3>Manage Subjects</h3>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addSubjectModal">Add Subject</button>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>Subject Name</th>
+                <th>Assigned Faculty</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sub in subjects %}
+            <tr>
+                <td>{{ sub.code }}</td>
+                <td>{{ sub.name }}</td>
+                <td>{{ sub.faculty.full_name if sub.faculty else 'Unassigned' }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Add Subject Modal -->
+<div class="modal fade" id="addSubjectModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{ url_for('add_subject') }}" method="POST">
+                <div class="modal-header">
+                    <h5>Add New Subject</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3"><label>Subject Code</label><input name="code" class="form-control"
+                            placeholder="e.g. CS101" required></div>
+                    <div class="mb-3"><label>Subject Name</label><input name="name" class="form-control"
+                            placeholder="e.g. Data Structures" required></div>
+                    <div class="mb-3">
+                        <label>Assign Faculty</label>
+                        <select name="faculty_id" class="form-select" required>
+                            {% for f in faculty_list %}
+                            <option value="{{ f.id }}">{{ f.full_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save Subject</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-md-10 offset-md-1">
+        <div class="card p-4">
+            <h3>Leave Requests</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Student</th>
+                        <th>Dates</th>
+                        <th>Reason</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for leave in leaves %}
+                    <tr>
+                        <td><strong>{{ leave.request_type }}</strong></td>
+                        <td>{{ leave.student.full_name }}</td>
+                        <td>{{ leave.start_date }} to {{ leave.end_date }}</td>
+                        <td>{{ leave.reason }}</td>
+                        <td><span class="badge bg-secondary">{{ leave.status }}</span></td>
+                        <td>
+                            <form method="POST" style="display:inline;">
+                                <input type="hidden" name="leave_id" value="{{ leave.id }}">
+                                <button type="submit" name="action" value="Approved"
+                                    class="btn btn-success btn-sm">Approve</button>
+                                <button type="submit" name="action" value="Rejected"
+                                    class="btn btn-danger btn-sm">Reject</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
